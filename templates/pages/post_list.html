@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <p>Usuario logueado: {{ user.username }}</p>  <!-- Línea de prueba -->
+
+    <h1>Posts</h1>
+
+    {% if user.is_authenticated %}
+    <a href="{% url 'post_create' %}" class="btn">➕ Crear nuevo post</a>
+    {% endif %}
+
+    {% if posts %}
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <h2>{{ post.title }}</h2>
+                    <p>Escrito por: {{ post.author.username }}</p>
+                    <p><strong>{{ post.subtitle }}</strong></p>
+                    <a href="{% url 'post_detail' post.pk %}">Leer más</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay posts aún.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Iniciar sesión</h2>
+
+  {% if form.errors %}
+    <p>Tu nombre de usuario y contraseña no coinciden. Intenta de nuevo.</p>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Iniciar sesión</button>
+  </form>
+
+  <p>¿No tenés cuenta? <a href="{% url 'signup' %}">Registrate acá</a></p>
+{% endblock %}

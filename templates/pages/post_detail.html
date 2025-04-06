@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <h3>{{ post.subtitle }}</h3>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="Imagen del post" style="max-width: 400px;">
+    {% endif %}
+    <p>{{ post.content|safe }}</p>
+    <p><em>Publicado el {{ post.created_at|date:"d M Y" }} por {{ post.author.username }}</em></p>
+    <a href="{% url 'post_list' %}">← Volver a los posts</a>
+
+    {% if user == post.author %}
+    <a href="{% url 'post_edit' post.pk %}">Editar</a> |
+    <a href="{% url 'post_delete' post.pk %}">Eliminar</a>
+    {% endif %}
+
+{% endblock %}
